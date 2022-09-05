@@ -11,7 +11,7 @@ import pystray
 from googletrans import Translator
 from keymouse import KeyMouse
 from PIL import Image
-from pynput.keyboard import KeyCode, Key, Listener
+from pynput.keyboard import Key, Listener
 
 # if "win32" in sys.platform:
 #     import pygetwindow as gw
