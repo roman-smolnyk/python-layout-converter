@@ -1,5 +1,7 @@
 # LAYOUT CONVERTER
 
+![Board](board.png)
+
 Convert abrakadabra into noraml text. E.g. "руддщ цщкдв" into "hello world". It is a tray app without gui.
 Any questions? Write me: [@Cartoonboy](https://t.me/Cartoonboy)
 
