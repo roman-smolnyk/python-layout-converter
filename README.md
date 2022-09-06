@@ -1,6 +1,6 @@
 # LAYOUT CONVERTER
 
-![Board](board.png)
+![Board](design/board.png)
 
 Convert abrakadabra into noraml text. E.g. "руддщ цщкдв" into "hello world". It is a tray app without gui.
 Any questions? Write me: [@Cartoonboy](https://t.me/Cartoonboy)
@@ -18,13 +18,13 @@ Any questions? Write me: [@Cartoonboy](https://t.me/Cartoonboy)
 * Turn on Caps Lock
 * Press shortcut (Ctrl + Shift + Shift)
 
-Translate
+### Translate
 
 * Change your keyboard layout to desired lang
 * Highlight text
 * Press shortcut (Ctrl + Alt + Alt)
 
-Change language
+### Change language
 
 * Press shortcut (Ctrl + Alt + number)
 * You can change languages and their order in your language settings
