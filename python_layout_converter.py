@@ -3,6 +3,7 @@ ICON_ICO = "iVBORw0KGgoAAAANSUhEUgAAAGYAAABeCAYAAADR9mGiAAAACXBIWXMAAAsSAAALEgHS
 import base64
 import os
 import sys
+import time
 from datetime import datetime, timedelta
 from io import BytesIO
 
@@ -36,8 +37,8 @@ class KeysHandler:
 
         self.available = self.keymouse.layout.list()
         self.previous_dt = datetime.now()
-        self.released_key = None
-        self.pressed_key = None
+        self.pressed_list = []
+        self.released_list = []
         self.caps_lock = False
         self.shift = False
         self.ctrl = False
@@ -95,7 +96,9 @@ class KeysHandler:
         elif key == Key.alt_l:
             self.alt = True
 
-        self.pressed_key = key
+        self.pressed_list.append(key)
+        if len(self.pressed_list) > 10:
+            self.pressed_list.pop(0)
 
     def on_release(self, key):
         print("{0} released".format(key))
@@ -110,20 +113,24 @@ class KeysHandler:
         elif key == Key.alt_l:
             self.alt = False
 
-        # Convert Ctrl + Shift + Shift
-        if self.ctrl and key == Key.shift_l and self.released_key == Key.shift_l and self.pressed_key == Key.shift_l:
-            if (self.previous_dt + timedelta(milliseconds=350)) > now:
+        self.released_list.append(key)
+        if len(self.released_list) > 10:
+            self.released_list.pop(0)
+
+        # Convert Shift + Shift
+        if self.released_list[-2:] == [Key.shift_l] * 2:
+            if (self.previous_dt + timedelta(milliseconds=250)) > now:
                 # Caps Lock
                 if self.caps_lock:
                     self.convert_capitalization()
                 else:
                     self.convert_layout()
-            self.released_key = None
+            self.released_list = []
             self.previous_dt = now
             return True
-        # Translate Ctrl + Alt + Alt
-        elif self.ctrl and key == Key.alt_l and self.released_key == Key.alt_l and self.pressed_key == Key.alt_l:
-            if (self.previous_dt + timedelta(milliseconds=350)) > now:
+        # Translate Alt + Alt
+        if self.released_list[-2:] == [Key.alt_l] * 2:
+            if (self.previous_dt + timedelta(milliseconds=250)) > now:
                 self.keymouse.cut()
                 text = pyclip.paste().decode()
                 lang = self.keymouse.layout.get()
@@ -135,7 +142,7 @@ class KeysHandler:
                 # text = translate(text, lang)
                 pyclip.copy(new_text)
                 self.keymouse.paste()
-            self.released_key = None
+            self.released_list = []
             self.previous_dt = now
             return True
         # Change lang Shift + Alt + Num
@@ -150,7 +157,6 @@ class KeysHandler:
             pass
 
         self.previous_dt = now
-        self.released_key = key
 
 
 def start_tray_app(keys_handler: KeysHandler):
