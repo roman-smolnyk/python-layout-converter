@@ -10,19 +10,19 @@ Any questions? Write me: [@Cartoonboy](https://t.me/Cartoonboy)
 ### Convert layout
 
 * Highlight text
-* Press shortcut(Ctrl + Shift + Shift)
+* Press shortcut(Shift + Shift)
 
 ### Convert capitalization
 
 * Highlight text
 * Turn on Caps Lock
-* Press shortcut (Ctrl + Shift + Shift)
+* Press shortcut (Shift + Shift)
 
 ### Translate
 
 * Change your keyboard layout to desired lang
 * Highlight text
-* Press shortcut (Ctrl + Alt + Alt)
+* Press shortcut (Alt + Alt)
 
 ### Change language
 
